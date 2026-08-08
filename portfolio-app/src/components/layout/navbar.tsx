@@ -164,22 +164,6 @@ export function Navbar() {
                   </Link>
                 </motion.div>
               ))}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: NAV_ITEMS.length * 0.1 }}
-                className="mt-4"
-              >
-                <Button 
-                  size="lg" 
-                  className="rounded-full px-8"
-                  onClick={(e) => {
-                    handleNavClick(e, `#${SECTION_IDS.CONTACT}`);
-                  }}
-                >
-                  Let&apos;s Talk
-                </Button>
-              </motion.div>
             </nav>
           </motion.div>
         )}

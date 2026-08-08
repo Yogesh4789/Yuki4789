@@ -27,7 +27,7 @@ export function Hero() {
       <Particles className="absolute inset-0 z-[1]" particleCount={40} />
 
       <div className="relative z-10 container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+        <div className="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-16">
           <div className="flex-1 text-center lg:text-left space-y-6">
             <Reveal>
               <div className="inline-flex">
@@ -41,7 +41,10 @@ export function Hero() {
               </div>
             </Reveal>
 
-            <BlurText text={personalInfo.name} className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight font-display" />
+            <Reveal>
+              <h1 className="text-2xl font-medium text-muted-foreground mb-2">Hi, I&apos;m</h1>
+            </Reveal>
+            <BlurText text={personalInfo.name} className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight font-display justify-center lg:justify-start" />
 
             <div className="h-10">
               <TypingEffect strings={typingStrings} className="text-xl md:text-2xl text-primary font-medium" />
