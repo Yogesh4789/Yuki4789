@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { projects } from '@/content/data';
 import type { ProjectCategory } from '@/types';
+import { useMediaQuery } from '@/hooks/use-media-query';
 
 const categories: { value: ProjectCategory; label: string }[] = [
   { value: 'all', label: 'All Projects' },
@@ -22,6 +23,7 @@ const categories: { value: ProjectCategory; label: string }[] = [
 export function Projects() {
   const [active, setActive] = useState<ProjectCategory>('all');
   const [search, setSearch] = useState('');
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
   const filtered = projects.filter((p) => {
     const matchesCategory = active === 'all' || p.category === active;
@@ -107,9 +109,9 @@ export function Projects() {
                       {project.videoUrl && !project.videoUrl.includes('<<') ? (
                         <video 
                           src={project.videoUrl} 
-                          autoPlay 
+                          autoPlay={!isMobile} 
                           muted 
-                          loop 
+                          loop={!isMobile} 
                           playsInline
                           className="w-full h-full object-cover"
                         />

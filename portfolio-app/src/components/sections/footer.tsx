@@ -9,6 +9,7 @@ import { Reveal } from '@/components/animations/reveal';
 import { GradientText } from '@/components/animations/gradient-text';
 import { personalInfo } from '@/content/data';
 import { NAV_ITEMS, SOCIAL_LINKS } from '@/constants';
+import { useMediaQuery } from '@/hooks/use-media-query';
 
 const socialIconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   github: Github, linkedin: Linkedin, twitter: Twitter, instagram: Instagram, mail: Mail,
@@ -17,12 +18,20 @@ const socialIconMap: Record<string, React.ComponentType<{ className?: string }>>
 
 export function Footer() {
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
   useEffect(() => {
-    const handleScroll = () => setShowBackToTop(window.scrollY > 500);
+    const handleScroll = () => {
+      if (isMobile) {
+        setShowBackToTop(false);
+        return;
+      }
+
+      setShowBackToTop(window.scrollY > 500);
+    };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isMobile]);
 
   return (
     <footer className="relative border-t border-border bg-card/50">
@@ -42,7 +51,7 @@ export function Footer() {
 
       {/* Back to Top */}
       <AnimatePresence>
-        {showBackToTop && (
+        {showBackToTop && !isMobile && (
           <motion.button
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}

@@ -17,6 +17,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { personalInfo } from '@/content/data';
 import { SOCIAL_LINKS } from '@/constants';
+import { useMediaQuery } from '@/hooks/use-media-query';
 
 const contactSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -37,6 +38,7 @@ import Hyperspeed from '@/components/backgrounds/Hyperspeed';
 export function Contact() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
@@ -70,10 +72,10 @@ export function Contact() {
   return (
     <SectionWrapper id="contact" className="relative overflow-hidden">
       <div 
-        className="absolute inset-0 z-0 opacity-100 pointer-events-none"
+        className={cn('absolute inset-0 z-0 pointer-events-none', isMobile ? 'opacity-20' : 'opacity-100')}
         style={{ maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)' }}
       >
-        <Hyperspeed effectOptions={{ onSpeedUp: () => { } }} />
+        {!isMobile && <Hyperspeed effectOptions={{ onSpeedUp: () => { } }} />}
       </div>
       <div className="relative z-10">
       <Reveal>

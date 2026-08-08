@@ -9,6 +9,7 @@ import { GradientText } from '@/components/animations/gradient-text';
 import { GlowCard } from '@/components/effects/glow-card';
 import { SectionWrapper } from '@/components/layout/section-wrapper';
 import { testimonials } from '@/content/data';
+import { useMediaQuery } from '@/hooks/use-media-query';
 
 const variants = {
   enter: (dir: number) => ({ x: dir > 0 ? 200 : -200, opacity: 0 }),
@@ -20,6 +21,7 @@ export function Testimonials() {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(1);
   const [isPaused, setIsPaused] = useState(false);
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
   const next = useCallback(() => {
     setDirection(1);
@@ -32,10 +34,10 @@ export function Testimonials() {
   }, []);
 
   useEffect(() => {
-    if (isPaused || !testimonials || testimonials.length === 0) return;
+    if (isMobile || isPaused || !testimonials || testimonials.length === 0) return;
     const timer = setInterval(next, 5000);
     return () => clearInterval(timer);
-  }, [isPaused, next]);
+  }, [isMobile, isPaused, next]);
 
   if (!testimonials || testimonials.length === 0) {
     return null;
@@ -48,7 +50,7 @@ export function Testimonials() {
   return (
     <SectionWrapper id="testimonials">
       <Reveal>
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             <GradientText>What People Say</GradientText>
           </h2>
@@ -62,6 +64,8 @@ export function Testimonials() {
         className="max-w-3xl mx-auto"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
+        onTouchStart={() => setIsPaused(true)}
+        onTouchEnd={() => setIsPaused(false)}
       >
         <div className="relative overflow-hidden min-h-[320px]">
           <AnimatePresence mode="wait" custom={direction}>
@@ -72,14 +76,14 @@ export function Testimonials() {
               initial="enter"
               animate="center"
               exit="exit"
-              transition={{ duration: 0.4, ease: 'easeInOut' }}
+              transition={{ duration: isMobile ? 0.2 : 0.4, ease: 'easeInOut' }}
               className="absolute inset-0"
             >
               <GlowCard className="h-full">
-                <div className="p-8 md:p-12 text-center space-y-6">
+                <div className="p-6 md:p-12 text-center space-y-5 md:space-y-6">
                   <Quote className="h-10 w-10 mx-auto text-primary/30" />
 
-                  <p className="text-lg md:text-xl text-foreground/90 italic leading-relaxed">
+                  <p className="text-base md:text-xl text-foreground/90 italic leading-relaxed">
                     &ldquo;{testimonial.content}&rdquo;
                   </p>
 

@@ -10,13 +10,16 @@ import { SectionWrapper } from '@/components/layout/section-wrapper';
 import { Button } from '@/components/ui/button';
 import { personalInfo } from '@/content/data';
 import GridMotion from '@/components/backgrounds/GridMotion';
+import { useMediaQuery } from '@/hooks/use-media-query';
 
 export function Resume() {
+  const isMobile = useMediaQuery('(max-width: 767px)');
+
   return (
     <SectionWrapper id="resume" className="relative overflow-hidden">
       <div className="relative z-10">
       <Reveal>
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             <GradientText>Resume</GradientText>
           </h2>
@@ -29,21 +32,23 @@ export function Resume() {
       <Reveal delay={0.2}>
         <div className="max-w-2xl mx-auto relative">
           {/* Floating decorations */}
-          <div className="absolute -top-8 -left-8 w-32 h-32 rounded-full bg-violet-500/10 blur-3xl" />
-          <div className="absolute -bottom-8 -right-8 w-40 h-40 rounded-full bg-indigo-500/10 blur-3xl" />
+          {!isMobile && <div className="absolute -top-8 -left-8 w-32 h-32 rounded-full bg-violet-500/10 blur-3xl" />}
+          {!isMobile && <div className="absolute -bottom-8 -right-8 w-40 h-40 rounded-full bg-indigo-500/10 blur-3xl" />}
 
           <GradientBorder borderWidth={1} rounded="2xl">
             <div className="bg-card/80 backdrop-blur-xl rounded-2xl p-8 md:p-12 text-center relative overflow-hidden">
               {/* Subtle grid bg */}
-              <div className="absolute inset-0 opacity-[0.03]" style={{
-                backgroundImage: 'radial-gradient(circle, currentColor 1px, transparent 1px)',
-                backgroundSize: '24px 24px',
-              }} />
+              {!isMobile && (
+                <div className="absolute inset-0 opacity-[0.03]" style={{
+                  backgroundImage: 'radial-gradient(circle, currentColor 1px, transparent 1px)',
+                  backgroundSize: '24px 24px',
+                }} />
+              )}
 
               <div className="relative z-10 space-y-6">
                 <motion.div
-                  animate={{ y: [0, -5, 0] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                  animate={isMobile ? undefined : { y: [0, -5, 0] }}
+                  transition={isMobile ? undefined : { duration: 3, repeat: Infinity, ease: 'easeInOut' }}
                 >
                   <div className="w-24 h-24 mx-auto rounded-2xl bg-gradient-to-br from-violet-500/10 to-indigo-500/10 border border-border flex items-center justify-center p-3 shadow-inner">
                     <img src="/images/Resume.png" alt="Resume Icon" className="w-full h-full object-contain" />
