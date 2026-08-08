@@ -17,6 +17,7 @@ const mySkills = [
   { name: 'J2SE', image: '/images/skill_images/J2SE.jpg' },
   { name: 'J2EE', image: '/images/skill_images/J2EE.jpg' },
   { name: 'MySQL', image: '/images/skill_images/MySQL.png' },
+  { name: 'OracleDB', image: '/images/skill_images/ORACLEDB.png' },
 ];
 
 const containerVariants: Variants = {
