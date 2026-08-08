@@ -87,7 +87,7 @@ export function Navbar() {
         transition={{ duration: 0.3, ease: 'easeInOut' }}
         className="fixed top-4 right-4 md:left-0 md:right-0 z-50 mx-auto max-w-3xl px-0 md:px-0 flex justify-end md:block"
       >
-        <div className="hidden md:flex h-14 w-full items-center justify-center rounded-full border border-border bg-background/70 px-4 backdrop-blur-xl shadow-sm dark:shadow-none relative">
+        <div className="hidden md:flex h-14 w-fit mx-auto items-center justify-center rounded-full border border-border bg-background/70 px-4 backdrop-blur-xl shadow-sm dark:shadow-none relative">
           
           {/* Centered Navigation Items */}
           <nav className="hidden md:flex items-center gap-2">
