@@ -131,10 +131,6 @@ export function Projects() {
                         </div>
                       )}
                     </div>
-                    {/* Hover Overlay */}
-                    <div className="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                      <span className="text-white font-semibold">View Project</span>
-                    </div>
                     {/* Featured Badge */}
                     {project.featured && (
                       <div className="absolute top-3 right-3 z-10">

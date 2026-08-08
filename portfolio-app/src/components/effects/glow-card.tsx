@@ -48,8 +48,8 @@ export function GlowCard({
         }}
       />
       
-      {/* Inner Card (covers gradient except for 1px border) */}
-      <div className="relative z-10 h-full w-full rounded-[11px] bg-[rgba(18,20,31,0.85)] backdrop-blur-xl p-6">
+      {/* Inner Card (covers gradient except for 1px border, opaque to prevent internal glowing) */}
+      <div className="relative z-10 h-full w-full rounded-[11px] bg-[rgb(18,20,31)] p-6">
         {children}
       </div>
     </div>
