@@ -6,6 +6,7 @@ import { GradientText } from '@/components/animations/gradient-text';
 import { SectionWrapper } from '@/components/layout/section-wrapper';
 import { skillIconMap } from '@/components/icons';
 import Particles from '@/components/backgrounds/Particles';
+import { useMediaQuery } from '@/hooks/use-media-query';
 
 /* ─── Exact skills from resume ─── */
 const mySkills = [
@@ -40,12 +41,18 @@ const itemVariants: Variants = {
 
 /* ─── Main Skills Component ─── */
 export function Skills() {
-  const row1 = mySkills.slice(0, 5);
-  const row2 = mySkills.slice(5, 9);
-  const row3 = mySkills.slice(9, 14);
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
-  const renderRow = (skills: typeof mySkills, rowIndex: number) => (
-    <div key={rowIndex} className="flex justify-center gap-3 sm:gap-6 w-full flex-wrap sm:flex-nowrap">
+  const row1 = isMobile ? mySkills.slice(0, 4) : mySkills.slice(0, 5);
+  const row2 = isMobile ? mySkills.slice(4, 8) : mySkills.slice(5, 9);
+  const row3 = isMobile ? mySkills.slice(8, 12) : mySkills.slice(9, 14);
+  const row4 = isMobile ? mySkills.slice(12, 14) : [];
+
+  const renderRow = (skills: typeof mySkills, rowIndex: number, mobileLayout = 'grid grid-cols-4 gap-x-2 gap-y-3 w-full justify-items-center') => (
+    <div
+      key={rowIndex}
+      className={isMobile ? mobileLayout : 'flex justify-center gap-3 sm:gap-6 w-full flex-wrap sm:flex-nowrap'}
+    >
       {skills.map((skill) => {
         const IconComponent = skillIconMap[skill.name];
         
@@ -55,9 +62,8 @@ export function Skills() {
             variants={itemVariants}
             className="flex flex-col items-center gap-2 sm:gap-3 group shrink-0"
           >
-            {/* Reduced size: from w-32/w-40 to w-20/w-28 */}
             <div
-              className="relative w-20 h-14 sm:w-28 sm:h-20 rounded-xl sm:rounded-2xl bg-white
+              className="relative w-full max-w-[5.25rem] aspect-[1.45] sm:w-28 sm:h-20 rounded-xl sm:rounded-2xl bg-white
                 flex items-center justify-center p-2 sm:p-3
                 shadow-[0_4px_12px_rgba(0,0,0,0.2)]
                 transition-transform duration-300 group-hover:scale-105 group-hover:-translate-y-1"
@@ -90,18 +96,18 @@ export function Skills() {
       >
         <Particles
           particleColors={['#ffffff', '#ffffff']}
-          particleCount={200}
+          particleCount={isMobile ? 60 : 200}
           particleSpread={10}
-          speed={0.1}
+          speed={isMobile ? 0.04 : 0.1}
           particleBaseSize={100}
-          moveParticlesOnHover={true}
+          moveParticlesOnHover={!isMobile}
           alphaParticles={true}
-          disableRotation={false}
+          disableRotation={isMobile}
         />
       </div>
       <div className="relative z-10">
         <Reveal>
-          <div className="text-center mb-10 sm:mb-16">
+          <div className="text-center mb-8 sm:mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               <GradientText>My Skills</GradientText>
             </h2>
@@ -115,11 +121,12 @@ export function Skills() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: '-100px' }}
-        className="flex flex-col items-center gap-6 sm:gap-8 max-w-5xl mx-auto overflow-hidden px-2"
+        className="flex flex-col items-center gap-4 sm:gap-8 max-w-5xl mx-auto overflow-hidden px-2"
       >
         {renderRow(row1, 0)}
         {renderRow(row2, 1)}
         {renderRow(row3, 2)}
+        {isMobile && renderRow(row4, 3, 'flex justify-center gap-4 w-full max-w-[10rem] mx-auto')}
       </motion.div>
       </div>
     </SectionWrapper>

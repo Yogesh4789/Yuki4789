@@ -5,6 +5,12 @@ import Lenis from 'lenis';
 
 export function SmoothScroll({ children }: { children: ReactNode }) {
   useEffect(() => {
+    const isMobile = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+
+    if (isMobile) {
+      return;
+    }
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
