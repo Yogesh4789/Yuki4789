@@ -1307,18 +1307,43 @@ const Hyperspeed: FC<HyperspeedProps> = ({ effectOptions = DEFAULT_EFFECT_OPTION
     const container = hyperspeed.current;
     if (!container) return;
 
-    const options: HyperspeedOptions = {
-      ...defaultOptions,
-      ...effectOptions,
-      colors: { ...defaultOptions.colors, ...effectOptions.colors }
-    };
-    if (typeof options.distortion === 'string') {
-      options.distortion = distortions[options.distortion];
-    }
+    const initApp = () => {
+      if (appRef.current) return; // already initialized
+      const w = container.offsetWidth;
+      const h = container.offsetHeight;
+      if (w <= 0 || h <= 0) return false; // not ready yet
 
-    const myApp = new App(container, options);
-    appRef.current = myApp;
-    myApp.loadAssets().then(myApp.init);
+      const options: HyperspeedOptions = {
+        ...defaultOptions,
+        ...effectOptions,
+        colors: { ...defaultOptions.colors, ...effectOptions.colors }
+      };
+      if (typeof options.distortion === 'string') {
+        options.distortion = distortions[options.distortion];
+      }
+
+      const myApp = new App(container, options);
+      appRef.current = myApp;
+      myApp.loadAssets().then(myApp.init);
+      return true;
+    };
+
+    // Try immediately
+    if (!initApp()) {
+      // Retry after a short delay if container wasn't ready
+      const retryTimer = setTimeout(() => {
+        if (!initApp()) {
+          // Final retry after layout settles
+          setTimeout(initApp, 500);
+        }
+      }, 100);
+      return () => {
+        clearTimeout(retryTimer);
+        if (appRef.current) {
+          appRef.current.dispose();
+        }
+      };
+    }
 
     return () => {
       if (appRef.current) {
