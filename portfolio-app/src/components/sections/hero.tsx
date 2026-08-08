@@ -27,7 +27,7 @@ export function Hero() {
       <Particles className="absolute inset-0 z-[1]" particleCount={40} />
 
       <div className="relative z-10 container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-16">
+        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
           <div className="flex-1 text-center lg:text-left space-y-6">
             <Reveal>
               <div className="inline-flex">
@@ -50,6 +50,29 @@ export function Hero() {
               <TypingEffect strings={typingStrings} className="text-xl md:text-2xl text-primary font-medium" />
             </div>
 
+            {/* Profile Picture (Mobile Only - positioned between title and subtitle) */}
+            <div className="flex md:hidden justify-center py-4">
+              <Reveal delay={0.3}>
+                <div className="relative">
+                  <GradientBorder rounded="rounded-full" borderWidth={2}>
+                    <div className="w-56 h-56 rounded-full overflow-hidden bg-muted/50 backdrop-blur-sm flex items-center justify-center">
+                      {personalInfo.profileImage && !personalInfo.profileImage.includes('<<') ? (
+                        <img 
+                          src={personalInfo.profileImage} 
+                          alt={personalInfo.name} 
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="text-muted-foreground text-center p-4">
+                          <User className="h-16 w-16 mx-auto mb-3 opacity-40" />
+                        </div>
+                      )}
+                    </div>
+                  </GradientBorder>
+                </div>
+              </Reveal>
+            </div>
+
             <Reveal delay={0.4}>
               <p className="text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 leading-relaxed">
                 {personalInfo.subtitle}
@@ -59,11 +82,11 @@ export function Hero() {
             <Reveal delay={0.6}>
               <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
                 <a href={personalInfo.resumeUrl} download>
-                  <Button size="lg" className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white shadow-lg shadow-violet-500/25 border-0">
+                  <Button size="lg" className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white shadow-lg shadow-violet-500/25 border-0 rounded-full px-8">
                     <Download className="mr-2 h-4 w-4" /> Resume
                   </Button>
                 </a>
-                <Button size="lg" variant="outline" className="border-border hover:border-primary/50 hover:bg-primary/5 backdrop-blur-sm"
+                <Button size="lg" variant="outline" className="border-border hover:border-primary/50 hover:bg-primary/5 backdrop-blur-sm rounded-full px-8"
                   onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
                   <Mail className="mr-2 h-4 w-4" /> Contact Me
                 </Button>
@@ -76,7 +99,7 @@ export function Hero() {
                   const Icon = iconMap[link.icon] || ExternalLink;
                   return (
                     <a key={link.name} href={link.url} target="_blank" rel="noopener noreferrer"
-                      className="p-2.5 rounded-xl border border-border hover:border-primary/50 hover:bg-primary/5 transition-all duration-300 group"
+                      className="p-3 rounded-full border border-border hover:border-primary/50 hover:bg-primary/5 transition-all duration-300 group"
                       aria-label={link.name}>
                       <Icon className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
                     </a>
@@ -86,10 +109,11 @@ export function Hero() {
             </Reveal>
           </div>
 
+          {/* Profile Picture (Desktop Only) */}
           <Reveal direction="right" delay={0.3}>
-            <div className="relative">
+            <div className="relative hidden md:block">
               <GradientBorder rounded="rounded-full" borderWidth={2}>
-                <div className="w-56 h-56 sm:w-64 sm:h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden bg-muted/50 backdrop-blur-sm flex items-center justify-center">
+                <div className="w-64 h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden bg-muted/50 backdrop-blur-sm flex items-center justify-center">
                   {personalInfo.profileImage && !personalInfo.profileImage.includes('<<') ? (
                     <img 
                       src={personalInfo.profileImage} 

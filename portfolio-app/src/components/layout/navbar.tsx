@@ -85,9 +85,9 @@ export function Navbar() {
           opacity: navHidden ? 0 : 1 
         }}
         transition={{ duration: 0.3, ease: 'easeInOut' }}
-        className="fixed top-4 left-0 right-0 z-50 mx-auto max-w-3xl px-4 md:px-0"
+        className="fixed top-4 right-4 md:left-0 md:right-0 z-50 mx-auto max-w-3xl px-0 md:px-0 flex justify-end md:block"
       >
-        <div className="flex h-14 w-full items-center justify-center rounded-full border border-border bg-background/70 px-4 backdrop-blur-xl shadow-sm dark:shadow-none relative">
+        <div className="hidden md:flex h-14 w-full items-center justify-center rounded-full border border-border bg-background/70 px-4 backdrop-blur-xl shadow-sm dark:shadow-none relative">
           
           {/* Centered Navigation Items */}
           <nav className="hidden md:flex items-center gap-2">
@@ -121,19 +121,19 @@ export function Navbar() {
               );
             })}
           </nav>
+        </div>
 
-          {/* Mobile Menu (positioned to the right) */}
-          <div className="flex items-center gap-2 absolute right-4">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden rounded-full"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </Button>
-          </div>
+        {/* Mobile Menu Button */}
+        <div className="md:hidden">
+          <Button
+            variant="outline"
+            size="icon"
+            className="rounded-full h-14 w-14 bg-background/70 backdrop-blur-xl border border-border shadow-lg"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </Button>
         </div>
       </motion.header>
 
@@ -148,7 +148,9 @@ export function Navbar() {
             className="fixed inset-0 z-40 flex flex-col items-center justify-center bg-background/95 backdrop-blur-xl md:hidden"
           >
             <nav className="flex flex-col items-center gap-6">
-              {NAV_ITEMS.map((item, i) => (
+              {NAV_ITEMS.map((item, i) => {
+                const isContact = item.label === 'Contact';
+                return (
                 <motion.div
                   key={item.label}
                   initial={{ opacity: 0, y: 20 }}
@@ -158,12 +160,15 @@ export function Navbar() {
                   <Link
                     href={item.href}
                     onClick={(e) => handleNavClick(e, item.href)}
-                    className="text-2xl font-bold tracking-tight hover:text-primary transition-colors"
+                    className={cn(
+                      "text-2xl font-bold tracking-tight hover:text-primary transition-colors",
+                      isContact ? "bg-primary text-primary-foreground px-8 py-3 rounded-full mt-4 inline-block !text-white" : ""
+                    )}
                   >
                     {item.label}
                   </Link>
                 </motion.div>
-              ))}
+              )})}
             </nav>
           </motion.div>
         )}

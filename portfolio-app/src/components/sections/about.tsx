@@ -90,8 +90,8 @@ export function About() {
               <GlowCard className="h-full">
                 <div className="p-8 flex flex-col md:flex-row gap-8 items-start md:items-center h-full">
                   
-                  {/* Logo Container */}
-                  <div className="w-24 h-24 md:w-32 md:h-32 shrink-0 flex items-center justify-center p-2">
+                  {/* Logo Container styled like the uploaded N logo */}
+                  <div className="w-24 h-24 md:w-32 md:h-32 shrink-0 flex items-center justify-center p-4 bg-zinc-900 dark:bg-zinc-900/80 rounded-2xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
                     {item.logo ? (
                       <div className="relative w-full h-full">
                         <Image 
@@ -99,7 +99,7 @@ export function About() {
                           alt={item.institution}
                           fill
                           sizes="(max-width: 768px) 96px, 128px"
-                          className="object-contain drop-shadow-md"
+                          className="object-contain drop-shadow-md filter brightness-110 contrast-125"
                         />
                       </div>
                     ) : (
