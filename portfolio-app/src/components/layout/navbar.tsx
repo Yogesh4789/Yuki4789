@@ -52,11 +52,8 @@ export function Navbar() {
     const targetId = href.substring(1);
     const element = document.getElementById(targetId);
     if (element) {
-      // The section itself has md:py-20 (80px) top padding.
-      // The navbar is 72px tall (top-4 + h-14).
-      // Setting navHeight to 0 means we scroll exactly to the top of the section's padding block.
-      // The 80px padding perfectly clears the 72px navbar and leaves an 8px gap for the title!
-      const navHeight = 0; 
+      // Offset scroll by the navbar height + some breathing room
+      const navHeight = 100; 
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - navHeight;
   

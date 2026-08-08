@@ -83,8 +83,11 @@ export function Skills() {
   );
 
   return (
-    <SectionWrapper id="skills">
-      <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
+    <SectionWrapper id="skills" className="relative overflow-hidden">
+      <div 
+        className="absolute inset-0 z-0 opacity-80 pointer-events-none"
+        style={{ maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)' }}
+      >
         <Particles
           particleColors={['#ffffff', '#ffffff']}
           particleCount={200}

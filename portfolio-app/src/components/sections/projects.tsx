@@ -19,8 +19,6 @@ const categories: { value: ProjectCategory; label: string }[] = [
   { value: 'ai-ml', label: 'AI/ML' },
 ];
 
-import Aurora from '@/components/backgrounds/Aurora';
-
 export function Projects() {
   const [active, setActive] = useState<ProjectCategory>('all');
   const [search, setSearch] = useState('');
@@ -35,9 +33,6 @@ export function Projects() {
 
   return (
     <SectionWrapper id="projects" className="relative overflow-hidden">
-      <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
-        <Aurora colorStops={["#8b5cf6", "#3b82f6", "#10b981"]} amplitude={0.8} />
-      </div>
       <div className="relative z-10">
         <Reveal>
           <div className="text-center mb-16">
@@ -104,10 +99,10 @@ export function Projects() {
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.3 }}
             >
-              <GlowCard className="h-full group">
+              <div className="h-full group relative rounded-xl border border-border bg-card overflow-hidden shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex flex-col h-full">
                   {/* Image Area */}
-                  <div className="relative aspect-video bg-muted/50 rounded-t-xl overflow-hidden">
+                  <div className="relative aspect-video bg-muted/50 overflow-hidden">
                     <div className="absolute inset-0 flex items-center justify-center bg-muted/20">
                       {project.videoUrl && !project.videoUrl.includes('<<') ? (
                         <video 
@@ -181,7 +176,7 @@ export function Projects() {
                     </div>
                   </div>
                 </div>
-              </GlowCard>
+              </div>
             </motion.div>
           ))}
         </AnimatePresence>

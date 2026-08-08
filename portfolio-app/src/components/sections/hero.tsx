@@ -84,7 +84,13 @@ export function Hero() {
                   </Button>
                 </a>
                 <Button size="lg" variant="outline" className="border-border hover:border-primary/50 hover:bg-primary/5 backdrop-blur-sm rounded-full px-8"
-                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
+                  onClick={() => {
+                    const el = document.getElementById('contact');
+                    if (el) {
+                      const offsetPosition = el.getBoundingClientRect().top + window.pageYOffset - 100;
+                      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                    }
+                  }}>
                   <Mail className="mr-2 h-4 w-4" /> Contact Me
                 </Button>
               </div>

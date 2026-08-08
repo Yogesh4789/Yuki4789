@@ -14,9 +14,6 @@ import GridMotion from '@/components/backgrounds/GridMotion';
 export function Resume() {
   return (
     <SectionWrapper id="resume" className="relative overflow-hidden">
-      <div className="absolute inset-0 z-0 opacity-10 pointer-events-none">
-        <GridMotion gradientColor="transparent" items={[]} />
-      </div>
       <div className="relative z-10">
       <Reveal>
         <div className="text-center mb-16">
@@ -24,7 +21,7 @@ export function Resume() {
             <GradientText>Resume</GradientText>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Download my resume to learn more about my experience
+            Dive deep into my professional journey, technical skills, and key achievements.
           </p>
         </div>
       </Reveal>
@@ -48,17 +45,17 @@ export function Resume() {
                   animate={{ y: [0, -5, 0] }}
                   transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
                 >
-                  <div className="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-violet-500/20 to-indigo-500/20 border border-border flex items-center justify-center">
-                    <FileText className="h-10 w-10 text-primary" />
+                  <div className="w-24 h-24 mx-auto rounded-2xl bg-gradient-to-br from-violet-500/10 to-indigo-500/10 border border-border flex items-center justify-center p-3 shadow-inner">
+                    <img src="/images/Resume.png" alt="Resume Icon" className="w-full h-full object-contain" />
                   </div>
                 </motion.div>
 
                 <div>
                   <h3 className="text-xl font-bold text-foreground mb-2">
-                    {personalInfo.name} — Resume
+                    Complete Professional Profile
                   </h3>
                   <p className="text-muted-foreground text-sm">
-                    PDF • Last updated: August 2026
+                    PDF • Detailed Experience & Skills
                   </p>
                 </div>
 

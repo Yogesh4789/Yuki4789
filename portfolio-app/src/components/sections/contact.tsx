@@ -47,15 +47,14 @@ export function Contact() {
     setSubmitStatus('idle');
     try {
       await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '',
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || '',
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
         {
-          name: data.name,
-          email: data.email,
-          subject: data.subject,
+          from_name: data.name,
+          from_email: data.email,
           message: data.message,
         },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || ''
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       );
       setSubmitStatus('success');
       reset();
@@ -70,7 +69,10 @@ export function Contact() {
 
   return (
     <SectionWrapper id="contact" className="relative overflow-hidden">
-      <div className="absolute inset-0 z-0 opacity-30 pointer-events-none">
+      <div 
+        className="absolute inset-0 z-0 opacity-100 pointer-events-none"
+        style={{ maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)' }}
+      >
         <Hyperspeed effectOptions={{ onSpeedUp: () => { } }} />
       </div>
       <div className="relative z-10">

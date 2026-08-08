@@ -14,7 +14,10 @@ import Waves from '@/components/backgrounds/Waves';
 export function Certifications() {
   return (
     <SectionWrapper id="certifications" className="relative overflow-hidden">
-      <div className="absolute inset-0 z-0 opacity-30 pointer-events-none">
+      <div 
+        className="absolute inset-0 z-0 opacity-80 pointer-events-none"
+        style={{ maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)' }}
+      >
         <Waves 
           lineColor="rgba(139, 92, 246, 0.3)" 
           backgroundColor="transparent" 

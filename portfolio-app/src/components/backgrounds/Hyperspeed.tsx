@@ -958,6 +958,13 @@ class App {
     this.renderer.setSize(initW, initH, false);
     this.renderer.setPixelRatio(window.devicePixelRatio);
 
+    const context = this.renderer.getContext();
+    if (!context || !context.getContextAttributes()) {
+      console.warn("WebGL context or attributes not available");
+      this.hasValidSize = false;
+      return;
+    }
+
     this.composer = new EffectComposer(this.renderer);
     container.appendChild(this.renderer.domElement);
 
@@ -978,7 +985,8 @@ class App {
       fogFar: { value: fog.far }
     };
 
-    this.clock = new THREE.Clock();
+    // Suppress deprecated clock warning by using Timer if available, else fallback
+    this.clock = (THREE as any).Timer ? new (THREE as any).Timer() : new THREE.Clock();
     this.assets = {};
     this.disposed = false;
 
@@ -1039,29 +1047,34 @@ class App {
   }
 
   initPasses() {
-    this.renderPass = new RenderPass(this.scene, this.camera);
-    this.bloomPass = new EffectPass(
-      this.camera,
-      new BloomEffect({
-        luminanceThreshold: 0.2,
-        luminanceSmoothing: 0,
-        resolutionScale: 1
-      })
-    );
+    if (!this.composer || !this.renderer || !this.scene || !this.camera) return;
+    try {
+      this.renderPass = new RenderPass(this.scene, this.camera);
+      this.bloomPass = new EffectPass(
+        this.camera,
+        new BloomEffect({
+          luminanceThreshold: 0.2,
+          luminanceSmoothing: 0,
+          resolutionScale: 1
+        })
+      );
 
-    const smaaPass = new EffectPass(
-      this.camera,
-      new SMAAEffect({
-        preset: SMAAPreset.MEDIUM
-      })
-    );
-    this.renderPass.renderToScreen = false;
-    this.bloomPass.renderToScreen = false;
-    smaaPass.renderToScreen = true;
+      const smaaPass = new EffectPass(
+        this.camera,
+        new SMAAEffect({
+          preset: SMAAPreset.MEDIUM
+        })
+      );
+      this.renderPass.renderToScreen = false;
+      this.bloomPass.renderToScreen = false;
+      smaaPass.renderToScreen = true;
 
-    this.composer.addPass(this.renderPass);
-    this.composer.addPass(this.bloomPass);
-    this.composer.addPass(smaaPass);
+      this.composer.addPass(this.renderPass);
+      this.composer.addPass(this.bloomPass);
+      this.composer.addPass(smaaPass);
+    } catch (e) {
+      console.warn("Failed to initialize postprocessing passes:", e);
+    }
   }
 
   loadAssets(): Promise<void> {
@@ -1092,6 +1105,7 @@ class App {
   }
 
   init() {
+    if (this.disposed || !this.composer || !this.renderer) return;
     this.initPasses();
     const options = this.options;
     this.road.init();
@@ -1102,7 +1116,7 @@ class App {
     this.rightCarLights.mesh.position.setX(options.roadWidth / 2 + options.islandWidth / 2);
 
     this.leftSticks.init();
-    this.leftSticks.mesh.position.setX(-(options.roadWidth + options.islandWidth / 2));
+    this.leftSticks.mesh.position.setX(-(options.roadWidth / 2 + options.islandWidth / 2));
 
     this.container.addEventListener('mousedown', this.onMouseDown);
     this.container.addEventListener('mouseup', this.onMouseUp);
@@ -1180,7 +1194,11 @@ class App {
   }
 
   render(delta: number) {
-    this.composer.render(delta);
+    if (this.composer && this.composer.passes && this.composer.passes.length > 0) {
+      this.composer.render(delta);
+    } else if (this.renderer && this.scene && this.camera) {
+      this.renderer.render(this.scene, this.camera);
+    }
   }
 
   dispose() {
