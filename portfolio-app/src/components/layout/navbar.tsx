@@ -87,10 +87,10 @@ export function Navbar() {
         transition={{ duration: 0.3, ease: 'easeInOut' }}
         className="fixed top-4 right-4 md:left-0 md:right-0 z-50 mx-auto max-w-3xl px-0 md:px-0 flex justify-end md:block"
       >
-        <div className="hidden md:flex h-14 w-fit mx-auto items-center justify-center rounded-full border border-border bg-background/70 px-4 backdrop-blur-xl shadow-sm dark:shadow-none relative">
+        <div className="hidden md:flex h-14 w-fit mx-auto items-center justify-center rounded-full border border-border bg-background/70 px-2 backdrop-blur-xl shadow-sm dark:shadow-none relative">
           
           {/* Centered Navigation Items */}
-          <nav className="hidden md:flex items-center gap-2">
+          <nav className="hidden md:flex items-center gap-1">
             {NAV_ITEMS.map((item) => {
               const isActive = activeSection === item.href.substring(1);
               const isContact = item.label === 'Contact';
@@ -101,7 +101,7 @@ export function Navbar() {
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
                   className={cn(
-                    "relative px-4 py-2 text-sm font-medium transition-colors text-center min-w-[80px]",
+                    "relative px-3 py-2 text-sm font-medium transition-colors text-center min-w-[70px]",
                     isContact 
                       ? "bg-primary text-primary-foreground hover:bg-primary/90 rounded-full !text-white"
                       : isActive 
