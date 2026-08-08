@@ -18,6 +18,9 @@ const mySkills = [
   { name: 'J2EE', image: '/images/skill_images/J2EE.jpg' },
   { name: 'MySQL', image: '/images/skill_images/MySQL.png' },
   { name: 'OracleDB', image: '/images/skill_images/ORACLEDB.png' },
+  { name: 'Docker', image: '/images/skill_images/DOCKER.png' },
+  { name: 'REST API', image: '/images/skill_images/RESTAPI.png' },
+  { name: 'Git', image: '/images/skill_images/GIT.png' },
 ];
 
 const containerVariants: Variants = {
