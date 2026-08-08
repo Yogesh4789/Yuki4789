@@ -25,12 +25,27 @@ const highlights = [
   { label: 'Scalable Systems', icon: Network },
 ];
 
+import Particles from '@/components/backgrounds/Particles';
+
 export function About() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <SectionWrapper id="about">
+    <SectionWrapper id="about" className="relative overflow-hidden">
+      <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
+        <Particles
+          particleColors={['#8b5cf6', '#3b82f6']}
+          particleCount={150}
+          particleSpread={8}
+          speed={0.08}
+          particleBaseSize={80}
+          moveParticlesOnHover={true}
+          alphaParticles={true}
+          disableRotation={false}
+        />
+      </div>
+      <div className="relative z-10">
       <Reveal>
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -128,6 +143,7 @@ export function About() {
             </Reveal>
           ))}
         </div>
+      </div>
       </div>
     </SectionWrapper>
   );

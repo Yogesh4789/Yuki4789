@@ -9,19 +9,37 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { certifications } from '@/content/data';
 
+import Waves from '@/components/backgrounds/Waves';
+
 export function Certifications() {
   return (
-    <SectionWrapper id="certifications">
-      <Reveal>
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <GradientText>Certifications</GradientText>
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Professional certifications and credentials
-          </p>
-        </div>
-      </Reveal>
+    <SectionWrapper id="certifications" className="relative overflow-hidden">
+      <div className="absolute inset-0 z-0 opacity-30 pointer-events-none">
+        <Waves 
+          lineColor="rgba(139, 92, 246, 0.3)" 
+          backgroundColor="transparent" 
+          waveSpeedX={0.02} 
+          waveSpeedY={0.01} 
+          waveAmpX={40} 
+          waveAmpY={20} 
+          friction={0.9} 
+          tension={0.01} 
+          maxCursorMove={120} 
+          xGap={12} 
+          yGap={36}
+        />
+      </div>
+      <div className="relative z-10">
+        <Reveal>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <GradientText>Certifications</GradientText>
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Professional certifications and credentials
+            </p>
+          </div>
+        </Reveal>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
         {certifications.map((cert, index) => (
@@ -87,6 +105,7 @@ export function Certifications() {
             </GlowCard>
           </Reveal>
         ))}
+      </div>
       </div>
     </SectionWrapper>
   );

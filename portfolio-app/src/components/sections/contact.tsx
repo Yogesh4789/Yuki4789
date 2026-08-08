@@ -32,6 +32,8 @@ const socialIconMap: Record<string, React.ComponentType<{ className?: string }>>
   code2: Code2, leetcode: Code2, hackerrank: Code2, medium: ExternalLink, devto: ExternalLink,
 };
 
+import Hyperspeed from '@/components/backgrounds/Hyperspeed';
+
 export function Contact() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -67,7 +69,11 @@ export function Contact() {
   const inputClasses = 'w-full px-4 py-3 rounded-xl bg-muted/30 border border-border text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all backdrop-blur-sm';
 
   return (
-    <SectionWrapper id="contact">
+    <SectionWrapper id="contact" className="relative overflow-hidden">
+      <div className="absolute inset-0 z-0 opacity-30 pointer-events-none">
+        <Hyperspeed effectOptions={{ onSpeedUp: () => { } }} />
+      </div>
+      <div className="relative z-10">
       <Reveal>
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -212,6 +218,7 @@ export function Contact() {
             </div>
           </Reveal>
         </div>
+      </div>
       </div>
     </SectionWrapper>
   );

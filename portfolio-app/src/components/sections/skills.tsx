@@ -5,6 +5,7 @@ import { Reveal } from '@/components/animations/reveal';
 import { GradientText } from '@/components/animations/gradient-text';
 import { SectionWrapper } from '@/components/layout/section-wrapper';
 import { skillIconMap } from '@/components/icons';
+import Particles from '@/components/backgrounds/Particles';
 
 /* ─── Exact skills from resume ─── */
 const mySkills = [
@@ -83,14 +84,27 @@ export function Skills() {
 
   return (
     <SectionWrapper id="skills">
-      <Reveal>
-        <div className="text-center mb-10 sm:mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <GradientText>My Skills</GradientText>
-          </h2>
-          <div className="w-16 h-1 bg-green-500 mx-auto rounded-full mt-2 mb-4"></div>
-        </div>
-      </Reveal>
+      <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
+        <Particles
+          particleColors={['#ffffff', '#ffffff']}
+          particleCount={200}
+          particleSpread={10}
+          speed={0.1}
+          particleBaseSize={100}
+          moveParticlesOnHover={true}
+          alphaParticles={true}
+          disableRotation={false}
+        />
+      </div>
+      <div className="relative z-10">
+        <Reveal>
+          <div className="text-center mb-10 sm:mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <GradientText>My Skills</GradientText>
+            </h2>
+            <div className="w-16 h-1 bg-green-500 mx-auto rounded-full mt-2 mb-4"></div>
+          </div>
+        </Reveal>
 
       {/* ── Staggered Layout ── */}
       <motion.div
@@ -104,6 +118,7 @@ export function Skills() {
         {renderRow(row2, 1)}
         {renderRow(row3, 2)}
       </motion.div>
+      </div>
     </SectionWrapper>
   );
 }

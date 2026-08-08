@@ -9,10 +9,15 @@ import { MagneticButton } from '@/components/effects/magnetic-button';
 import { SectionWrapper } from '@/components/layout/section-wrapper';
 import { Button } from '@/components/ui/button';
 import { personalInfo } from '@/content/data';
+import GridMotion from '@/components/backgrounds/GridMotion';
 
 export function Resume() {
   return (
-    <SectionWrapper id="resume">
+    <SectionWrapper id="resume" className="relative overflow-hidden">
+      <div className="absolute inset-0 z-0 opacity-10 pointer-events-none">
+        <GridMotion gradientColor="transparent" items={[]} />
+      </div>
+      <div className="relative z-10">
       <Reveal>
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -74,6 +79,7 @@ export function Resume() {
           </GradientBorder>
         </div>
       </Reveal>
+      </div>
     </SectionWrapper>
   );
 }

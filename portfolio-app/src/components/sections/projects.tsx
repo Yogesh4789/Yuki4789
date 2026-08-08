@@ -19,6 +19,8 @@ const categories: { value: ProjectCategory; label: string }[] = [
   { value: 'ai-ml', label: 'AI/ML' },
 ];
 
+import Aurora from '@/components/backgrounds/Aurora';
+
 export function Projects() {
   const [active, setActive] = useState<ProjectCategory>('all');
   const [search, setSearch] = useState('');
@@ -32,9 +34,13 @@ export function Projects() {
   });
 
   return (
-    <SectionWrapper id="projects">
-      <Reveal>
-        <div className="text-center mb-16">
+    <SectionWrapper id="projects" className="relative overflow-hidden">
+      <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
+        <Aurora colorStops={["#8b5cf6", "#3b82f6", "#10b981"]} amplitude={0.8} />
+      </div>
+      <div className="relative z-10">
+        <Reveal>
+          <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             <GradientText>Featured Projects</GradientText>
           </h2>
@@ -187,6 +193,7 @@ export function Projects() {
           <p className="text-muted-foreground">No projects found matching your criteria</p>
         </motion.div>
       )}
+      </div>
     </SectionWrapper>
   );
 }
