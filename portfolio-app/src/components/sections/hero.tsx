@@ -26,11 +26,11 @@ export function Hero() {
       <AuroraBackground className="absolute inset-0" />
       <Particles className="absolute inset-0 z-[1]" particleCount={40} />
 
-      <div className="relative z-10 container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+      <div className="relative z-10 container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16 lg:py-20 flex flex-col justify-start md:justify-center min-h-[calc(100vh-4rem)]">
+        <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
           <div className="flex-1 text-center lg:text-left space-y-6">
             <Reveal>
-              <div className="inline-flex">
+              <div className="inline-flex mb-2">
                 <Badge variant="outline" className="px-4 py-1.5 text-sm backdrop-blur-sm bg-emerald-500/10 border-emerald-500/30 text-emerald-400">
                   <span className="relative mr-2 flex h-2 w-2">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
@@ -41,11 +41,6 @@ export function Hero() {
               </div>
             </Reveal>
 
-            <Reveal>
-              <h2 className="text-xl sm:text-2xl font-semibold text-primary/90 tracking-widest uppercase mb-3">
-                Hi, I&apos;m
-              </h2>
-            </Reveal>
             <BlurText text={personalInfo.name} className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight font-display justify-center lg:justify-start" />
 
             <div className="h-10">
