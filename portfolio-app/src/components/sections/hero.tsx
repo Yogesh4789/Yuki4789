@@ -42,7 +42,9 @@ export function Hero() {
             </Reveal>
 
             <Reveal>
-              <h1 className="text-2xl font-medium text-muted-foreground mb-2">Hi, I&apos;m</h1>
+              <h2 className="text-xl sm:text-2xl font-semibold text-primary/90 tracking-widest uppercase mb-3">
+                Hi, I&apos;m
+              </h2>
             </Reveal>
             <BlurText text={personalInfo.name} className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight font-display justify-center lg:justify-start" />
 
