@@ -26,7 +26,7 @@ export function Hero() {
       <AuroraBackground className="absolute inset-0" />
       <Particles className="absolute inset-0 z-[1]" particleCount={40} />
 
-      <div className="relative z-10 container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16 lg:py-20 flex flex-col justify-start md:justify-center min-h-[calc(100vh-4rem)]">
+      <div className="relative z-10 container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-32 pb-16 lg:py-20 flex flex-col justify-start md:justify-center min-h-[calc(100vh-4rem)]">
         <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
           <div className="flex-1 text-center lg:text-left space-y-6">
             <Reveal>
