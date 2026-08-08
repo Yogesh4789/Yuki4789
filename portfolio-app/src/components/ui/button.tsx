@@ -10,13 +10,13 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-violet-600 text-white shadow-[0_0_15px] shadow-violet-500/30 border border-violet-500/50 hover:bg-violet-700 hover:shadow-violet-500/50",
-        destructive: "bg-red-500/10 text-red-400 border border-red-500/20 shadow-[0_0_15px] shadow-red-500/20 hover:bg-red-500/20",
-        outline: "border border-violet-500/50 bg-transparent shadow-[0_0_15px] shadow-violet-500/20 hover:bg-violet-500/10 hover:shadow-violet-500/40 text-violet-100",
-        secondary: "bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 shadow-[0_0_15px] shadow-indigo-500/20 hover:bg-indigo-500/20",
-        ghost: "hover:bg-white/5 hover:text-slate-200 text-slate-400",
-        link: "text-violet-400 underline-offset-4 hover:underline",
-        gradient: "bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 text-white border border-indigo-400/50 shadow-[0_0_15px] shadow-indigo-500/40 hover:opacity-90 animate-gradient-x bg-[length:200%_auto] hover:shadow-indigo-500/60"
+        default: "bg-violet-600 text-white border border-transparent shadow-sm hover:bg-violet-700 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300",
+        destructive: "bg-red-500/10 text-red-400 border border-transparent shadow-sm hover:bg-red-500/20 hover:-translate-y-0.5 transition-all duration-300",
+        outline: "border border-violet-500/30 bg-transparent text-violet-200 shadow-sm hover:bg-violet-500/10 hover:border-violet-500/50 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300",
+        secondary: "bg-indigo-500/10 text-indigo-400 border border-transparent shadow-sm hover:bg-indigo-500/20 hover:-translate-y-0.5 transition-all duration-300",
+        ghost: "hover:bg-white/5 hover:text-slate-200 text-slate-400 transition-all duration-300",
+        link: "text-violet-400 underline-offset-4 hover:underline transition-all duration-300",
+        gradient: "bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 text-white shadow-sm hover:shadow-md hover:opacity-90 hover:-translate-y-0.5 transition-all duration-300 animate-gradient-x bg-[length:200%_auto]"
       },
       size: {
         default: "h-10 px-4 py-2",
