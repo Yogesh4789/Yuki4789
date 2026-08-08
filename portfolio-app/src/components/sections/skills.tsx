@@ -8,26 +8,28 @@ import { skillIconMap } from '@/components/icons';
 
 /* ─── Exact skills from resume ─── */
 const mySkills = [
-  { name: 'HTML5' },
-  { name: 'CSS' },
-  { name: 'JavaScript' },
-  { name: 'Python' },
-  { name: 'C' },
-  { name: 'C++' },
-  { name: 'J2SE' },
-  { name: 'J2EE' },
-  { name: 'MySQL' },
-  { name: 'OracleDB' },
-  { name: 'Docker' },
-  { name: 'REST API' },
-  { name: 'Git' },
+  { name: 'HTML5', image: '/images/skill_images/HTML5.jpg' },
+  { name: 'CSS', image: '/images/skill_images/CSS.png' },
+  { name: 'JavaScript', image: '/images/skill_images/JS.png' },
+  { name: 'Python', image: '/images/skill_images/PYTHON.png' },
+  { name: 'C', image: '/images/skill_images/C.png' },
+  { name: 'C++', image: '/images/skill_images/C++.png' },
+  { name: 'J2SE', image: '/images/skill_images/J2SE.jpg' },
+  { name: 'J2EE', image: '/images/skill_images/J2EE.jpg' },
+  { name: 'MySQL', image: '/images/skill_images/MySQL.png' },
+  { name: 'OracleDB', image: '/images/skill_images/ORACLEDB.png' },
+  { name: 'Docker', image: '/images/skill_images/DOCKER.png' },
+  { name: 'REST API', image: '/images/skill_images/RESTAPI.png' },
+  { name: 'Git', image: '/images/skill_images/GIT.png' },
 ];
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: { staggerChildren: 0.1 },
+    transition: {
+      staggerChildren: 0.1,
+    },
   },
 };
 
@@ -38,48 +40,6 @@ const itemVariants: Variants = {
 
 /* ─── Main Skills Component ─── */
 export function Skills() {
-  // Split into rows of 5, 4, 4
-  const row1 = mySkills.slice(0, 5);
-  const row2 = mySkills.slice(5, 9);
-  const row3 = mySkills.slice(9, 13);
-  
-  const renderRow = (skills: typeof mySkills, rowIndex: number) => (
-    <div key={rowIndex} className="flex flex-wrap justify-center gap-4 sm:gap-6 lg:gap-8 w-full">
-      {skills.map((skill) => {
-        const IconComponent = skillIconMap[skill.name];
-        
-        return (
-          <motion.div 
-            key={skill.name} 
-            variants={itemVariants}
-            className="flex flex-col items-center gap-3 group"
-          >
-            {/* Darker rounded rectangle container to match app theme */}
-            <div
-              className="relative w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 rounded-2xl bg-zinc-900/50 border border-white/10
-                flex items-center justify-center p-4 backdrop-blur-sm
-                shadow-lg
-                transition-transform duration-300 group-hover:scale-105 group-hover:-translate-y-1 group-hover:bg-zinc-800/80"
-            >
-              {IconComponent ? (
-                <IconComponent className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 drop-shadow-md z-10 transition-colors group-hover:text-primary" />
-              ) : (
-                <span className="text-white/80 font-bold text-lg z-10">
-                  {skill.name.slice(0, 2)}
-                </span>
-              )}
-            </div>
-
-            {/* Skill Name */}
-            <span className="text-sm sm:text-base font-semibold text-muted-foreground group-hover:text-white transition-colors tracking-wide">
-              {skill.name}
-            </span>
-          </motion.div>
-        );
-      })}
-    </div>
-  );
-
   return (
     <SectionWrapper id="skills">
       {/* Centered Header */}
@@ -92,17 +52,48 @@ export function Skills() {
         </div>
       </Reveal>
 
-      {/* ── Staggered Grid Layout (5, 4, 4) ── */}
+      {/* ── 3x3 Grid Layout ── */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: '-100px' }}
-        className="flex flex-col items-center gap-6 sm:gap-10 max-w-5xl mx-auto"
+        className="grid grid-cols-2 md:grid-cols-3 gap-y-12 gap-x-8 max-w-4xl mx-auto place-items-center"
       >
-        {renderRow(row1, 0)}
-        {renderRow(row2, 1)}
-        {renderRow(row3, 2)}
+        {mySkills.map((skill) => {
+          const IconComponent = skillIconMap[skill.name];
+          
+          return (
+            <motion.div 
+              key={skill.name} 
+              variants={itemVariants}
+              className="flex flex-col items-center gap-4 group w-full"
+            >
+              {/* Rounded Rectangle Container perfectly fitted for varied aspect ratios */}
+              <div
+                className="relative w-32 h-20 sm:w-40 sm:h-24 rounded-2xl bg-white
+                  flex items-center justify-center p-3
+                  shadow-[0_4px_12px_rgba(0,0,0,0.2)]
+                  transition-transform duration-300 group-hover:scale-105 group-hover:-translate-y-1"
+              >
+                {skill.image ? (
+                  <img src={skill.image} alt={skill.name} className="w-full h-full object-contain drop-shadow-sm z-10" />
+                ) : IconComponent ? (
+                  <IconComponent className="w-12 h-12 sm:w-14 sm:h-14 drop-shadow-md z-10" />
+                ) : (
+                  <span className="text-black font-bold text-lg z-10">
+                    {skill.name.slice(0, 2)}
+                  </span>
+                )}
+              </div>
+
+              {/* Skill Name */}
+              <span className="text-base sm:text-lg font-bold text-white tracking-wide">
+                {skill.name}
+              </span>
+            </motion.div>
+          );
+        })}
       </motion.div>
     </SectionWrapper>
   );
