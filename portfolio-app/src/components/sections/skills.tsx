@@ -21,15 +21,14 @@ const mySkills = [
   { name: 'Docker', image: '/images/skill_images/DOCKER.png' },
   { name: 'REST API', image: '/images/skill_images/RESTAPI.png' },
   { name: 'Git', image: '/images/skill_images/GIT.png' },
+  { name: 'GitHub', image: '/images/skill_images/GITHUB.jpg' },
 ];
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
+    transition: { staggerChildren: 0.1 },
   },
 };
 
@@ -40,11 +39,52 @@ const itemVariants: Variants = {
 
 /* ─── Main Skills Component ─── */
 export function Skills() {
+  const row1 = mySkills.slice(0, 5);
+  const row2 = mySkills.slice(5, 9);
+  const row3 = mySkills.slice(9, 14);
+
+  const renderRow = (skills: typeof mySkills, rowIndex: number) => (
+    <div key={rowIndex} className="flex justify-center gap-3 sm:gap-6 w-full flex-wrap sm:flex-nowrap">
+      {skills.map((skill) => {
+        const IconComponent = skillIconMap[skill.name];
+        
+        return (
+          <motion.div 
+            key={skill.name} 
+            variants={itemVariants}
+            className="flex flex-col items-center gap-2 sm:gap-3 group shrink-0"
+          >
+            {/* Reduced size: from w-32/w-40 to w-20/w-28 */}
+            <div
+              className="relative w-20 h-14 sm:w-28 sm:h-20 rounded-xl sm:rounded-2xl bg-white
+                flex items-center justify-center p-2 sm:p-3
+                shadow-[0_4px_12px_rgba(0,0,0,0.2)]
+                transition-transform duration-300 group-hover:scale-105 group-hover:-translate-y-1"
+            >
+              {skill.image ? (
+                <img src={skill.image} alt={skill.name} className="w-full h-full object-contain drop-shadow-sm z-10" />
+              ) : IconComponent ? (
+                <IconComponent className="w-8 h-8 sm:w-10 sm:h-10 drop-shadow-md z-10" />
+              ) : (
+                <span className="text-black font-bold text-base z-10">
+                  {skill.name.slice(0, 2)}
+                </span>
+              )}
+            </div>
+
+            <span className="text-xs sm:text-sm font-bold text-white tracking-wide">
+              {skill.name}
+            </span>
+          </motion.div>
+        );
+      })}
+    </div>
+  );
+
   return (
     <SectionWrapper id="skills">
-      {/* Centered Header */}
       <Reveal>
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 sm:mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             <GradientText>My Skills</GradientText>
           </h2>
@@ -52,48 +92,17 @@ export function Skills() {
         </div>
       </Reveal>
 
-      {/* ── 3x3 Grid Layout ── */}
+      {/* ── Staggered Layout ── */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: '-100px' }}
-        className="grid grid-cols-2 md:grid-cols-3 gap-y-12 gap-x-8 max-w-4xl mx-auto place-items-center"
+        className="flex flex-col items-center gap-6 sm:gap-8 max-w-5xl mx-auto overflow-hidden px-2"
       >
-        {mySkills.map((skill) => {
-          const IconComponent = skillIconMap[skill.name];
-          
-          return (
-            <motion.div 
-              key={skill.name} 
-              variants={itemVariants}
-              className="flex flex-col items-center gap-4 group w-full"
-            >
-              {/* Rounded Rectangle Container perfectly fitted for varied aspect ratios */}
-              <div
-                className="relative w-32 h-20 sm:w-40 sm:h-24 rounded-2xl bg-white
-                  flex items-center justify-center p-3
-                  shadow-[0_4px_12px_rgba(0,0,0,0.2)]
-                  transition-transform duration-300 group-hover:scale-105 group-hover:-translate-y-1"
-              >
-                {skill.image ? (
-                  <img src={skill.image} alt={skill.name} className="w-full h-full object-contain drop-shadow-sm z-10" />
-                ) : IconComponent ? (
-                  <IconComponent className="w-12 h-12 sm:w-14 sm:h-14 drop-shadow-md z-10" />
-                ) : (
-                  <span className="text-black font-bold text-lg z-10">
-                    {skill.name.slice(0, 2)}
-                  </span>
-                )}
-              </div>
-
-              {/* Skill Name */}
-              <span className="text-base sm:text-lg font-bold text-white tracking-wide">
-                {skill.name}
-              </span>
-            </motion.div>
-          );
-        })}
+        {renderRow(row1, 0)}
+        {renderRow(row2, 1)}
+        {renderRow(row3, 2)}
       </motion.div>
     </SectionWrapper>
   );
