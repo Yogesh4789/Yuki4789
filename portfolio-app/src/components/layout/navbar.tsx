@@ -9,11 +9,13 @@ import { NAV_ITEMS, SECTION_IDS } from '@/constants';
 import { useScrollSpy } from '@/hooks/use-scroll-spy';
 import { useScrollDirection } from '@/hooks/use-scroll-direction';
 import { useMounted } from '@/hooks/use-mounted';
+import { useMediaQuery } from '@/hooks/use-media-query';
 import { Button } from '@/components/ui/button';
 
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const isMounted = useMounted();
+  const isMobile = useMediaQuery('(max-width: 767px)');
   const scrollDirection = useScrollDirection();
   
   // Use scroll spy to detect active section. Use empty string for fallback.
@@ -69,7 +71,7 @@ export function Navbar() {
     }
   };
 
-  const navHidden = scrollDirection === 'down' && !isMobileMenuOpen;
+  const navHidden = !isMobile && scrollDirection === 'down' && !isMobileMenuOpen;
 
   if (!isMounted) return null;
 

@@ -1,8 +1,13 @@
 'use client';
 
 import { motion, useScroll, useSpring } from 'framer-motion';
+import { useMediaQuery } from '@/hooks/use-media-query';
 
 export function ScrollProgress() {
+  const isMobile = useMediaQuery('(max-width: 767px)');
+
+  if (isMobile) return null;
+
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,

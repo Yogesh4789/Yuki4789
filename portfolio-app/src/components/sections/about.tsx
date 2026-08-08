@@ -41,13 +41,13 @@ export function About() {
       >
         <Particles
           particleColors={['#8b5cf6', '#3b82f6']}
-          particleCount={150}
+          particleCount={isMobile ? 40 : 150}
           particleSpread={8}
-          speed={0.08}
+          speed={isMobile ? 0.03 : 0.08}
           particleBaseSize={80}
-          moveParticlesOnHover={true}
+          moveParticlesOnHover={!isMobile}
           alphaParticles={true}
-          disableRotation={false}
+          disableRotation={isMobile}
         />
       </div>
       <div className="relative z-10">

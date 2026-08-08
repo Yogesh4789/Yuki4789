@@ -14,6 +14,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { personalInfo, typingStrings } from '@/content/data';
 import { SOCIAL_LINKS } from '@/constants';
+import { useMediaQuery } from '@/hooks/use-media-query';
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   github: Github, linkedin: Linkedin, twitter: Twitter, instagram: Instagram, mail: Mail,
@@ -21,10 +22,12 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 };
 
 export function Hero() {
+  const isMobile = useMediaQuery('(max-width: 767px)');
+
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <AuroraBackground className="absolute inset-0" />
-      <Particles className="absolute inset-0 z-[1]" particleCount={40} />
+      <Particles className="absolute inset-0 z-[1]" particleCount={isMobile ? 8 : 40} speed={isMobile ? 0.03 : 0.08} moveParticlesOnHover={false} disableRotation={isMobile} />
 
       <div className="relative z-10 container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-32 pb-16 lg:py-20 flex flex-col justify-start md:justify-center min-h-[calc(100vh-4rem)]">
         <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
