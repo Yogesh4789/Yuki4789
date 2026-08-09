@@ -55,7 +55,7 @@ export function Navbar() {
     const element = document.getElementById(targetId);
     if (element) {
       // Offset scroll a bit more so the section lands slightly higher on screen.
-      const navHeight = isMobile ? 160 : 136;
+      const navHeight = isMobile ? 240 : 200;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - navHeight;
   
