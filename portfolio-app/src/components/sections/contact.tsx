@@ -54,6 +54,7 @@ export function Contact() {
         {
           from_name: data.name,
           from_email: data.email,
+          subject: data.subject,
           message: data.message,
         },
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
