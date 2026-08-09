@@ -52,8 +52,8 @@ export function Contact() {
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
         {
-          from_name: data.name,
-          from_email: data.email,
+          name: data.name,
+          email: data.email,
           subject: data.subject,
           message: data.message,
         },
