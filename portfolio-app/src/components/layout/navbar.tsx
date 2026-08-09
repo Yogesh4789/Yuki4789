@@ -47,28 +47,8 @@ export function Navbar() {
     };
   }, [isMobileMenuOpen]);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLElement>, href: string) => {
-    e.preventDefault();
+  const handleNavClick = () => {
     setIsMobileMenuOpen(false);
-    
-    const targetId = href.substring(1);
-    const element = document.getElementById(targetId);
-    if (element) {
-      // Offset scroll a bit more so the section lands slightly higher on screen.
-      const navHeight = isMobile ? 240 : 200;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - navHeight;
-  
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    } else if (href === '#') {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    }
   };
 
   const navHidden = !isMobile && scrollDirection === 'down' && !isMobileMenuOpen;
@@ -98,7 +78,7 @@ export function Navbar() {
                 <Link
                   key={item.label}
                   href={item.href}
-                  onClick={(e) => handleNavClick(e, item.href)}
+                  onClick={handleNavClick}
                   className={cn(
                     "relative px-3 py-2 text-sm font-medium transition-colors text-center min-w-[70px]",
                     isContact 
@@ -158,7 +138,7 @@ export function Navbar() {
                 >
                   <Link
                     href={item.href}
-                    onClick={(e) => handleNavClick(e, item.href)}
+                    onClick={handleNavClick}
                     className={cn(
                       "text-2xl font-bold tracking-tight hover:text-primary transition-colors",
                       isContact ? "bg-primary text-primary-foreground px-8 py-3 rounded-full mt-4 inline-block !text-white" : ""
